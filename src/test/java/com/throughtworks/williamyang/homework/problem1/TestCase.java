@@ -68,5 +68,29 @@ public class TestCase {
     }
 
 
+    @Test
+    public void test06(){
+        System.out.println(convertOutput(g.search('C','C',3,-1)));
+    }
+
+    @Test
+    public void test07(){
+        System.out.println(convertOutput(g.deepSearch('A','C',4,0)));
+    }
+
+    @Test
+    public void test08(){
+        System.out.println(convertOutput(g.shortestPath('A','C')));
+    }
+
+    @Test
+    public void test09(){
+        System.out.println(convertOutput(g.shortestPath('B','B')));
+    }
+
+    @Test
+    public void test10(){
+        System.out.println(convertOutput(g.sumPathes('C','C',30)));
+    }
 
 }

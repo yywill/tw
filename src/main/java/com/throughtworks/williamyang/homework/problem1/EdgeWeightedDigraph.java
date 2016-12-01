@@ -9,10 +9,10 @@ public class EdgeWeightedDigraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private int v;                // number of vertices in this digraph
-    private int e;                      // number of edges in this digraph
-    private Map<Character,List<DirectedEdge>> adj = new HashMap(128);    // adj[v] = adjacency list for vertex v
+    private int e;                // number of edges in this digraph
+    private Map<Character,List<DirectedEdge>> adj = new HashMap<Character, List<DirectedEdge>>(128);    // adj[v] = adjacency list for vertex v
     private int[] indegree;             // indegree[v] = indegree of vertex v
-
+    private int maxWeight =0;
 
 
 
@@ -53,9 +53,11 @@ public class EdgeWeightedDigraph {
         validateVertex(v);
         validateVertex(w);
         if (adj.get(v)==null)
-            adj.put(v,new ArrayList());
+            adj.put(v,new ArrayList<DirectedEdge>());
         adj.get(v).add(e);
         this.e++;
+        this.maxWeight += e.weight();
+
     }
 
     public Iterable<DirectedEdge> adj(int v) {
@@ -152,4 +154,79 @@ public class EdgeWeightedDigraph {
        return weight;
     }
 
+    // exclude circles !
+    // left:  <0 as null
+    //         >0 as left stop to count
+    public int search (char a, char b , int max, int left){
+        int searchCount = max;
+        Iterator<DirectedEdge> it = adj.get(a).iterator();
+        int count =0;
+        while(it.hasNext()){
+            DirectedEdge edge = it.next();
+            if (edge.to()==b){
+                if (left <0 ||left+1 == max)
+                count ++;
+            }else{
+                if (searchCount >1)
+                count += search(edge.to(),b,searchCount-1,left);
+            }
+        }
+        return count;
+    }
+
+    //include circles !
+    // left:  <0 as null
+    //         >0 as left stop to count
+    public int deepSearch (char a, char b , int max, int left){
+        int searchCount = max;
+        Iterator<DirectedEdge> it = adj.get(a).iterator();
+        int count =0;
+        while(it.hasNext()){
+            DirectedEdge edge = it.next();
+            if (edge.to()==b){
+                if (left <0 ||left+1 == max)
+                    count ++;
+                else
+                    count += deepSearch(edge.to(),b,searchCount-1,left);
+            }else{
+                if (searchCount >1)
+                    count += deepSearch(edge.to(),b,searchCount-1,left);
+            }
+        }
+        return count;
+    }
+
+
+    public int search (char a, char b , int max, int left, int weight, PriorityQueue<Integer> queue){
+        int searchCount = max;
+        Iterator<DirectedEdge> it = adj.get(a).iterator();
+        int count =0;
+        while(it.hasNext()){
+            DirectedEdge edge = it.next();
+            if (edge.to()==b){
+                if (left <0 ||left+1 == max){
+                    count ++;
+                    queue.add(weight+edge.weight());
+                }
+
+            }else{
+                if (searchCount >1)
+                    count += search(edge.to(),b,searchCount-1,left, edge.weight()+weight,queue);
+            }
+        }
+        return count;
+    }
+
+    public int shortestPath(char a, char b ){
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
+        int search = search(a, b, e, -1, 0, queue);
+        return queue.poll();
+    }
+
+
+    public int sumPathes(char a, char b, int max) {
+
+        return 0;
+
+    }
 }
