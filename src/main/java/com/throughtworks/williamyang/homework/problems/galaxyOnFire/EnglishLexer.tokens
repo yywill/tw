@@ -1,0 +1,17 @@
+IS=1
+ROMAN=2
+CEDITS=3
+OBJECTS=4
+HOWMANY=5
+HOWMUCH=6
+Q=7
+DECIMAL=8
+IDENTIFIER=9
+NEWLINE=10
+WC=11
+QUANTANTY=12
+'is'=1
+'Credits'=3
+'how many'=5
+'how much'=6
+'?'=7
