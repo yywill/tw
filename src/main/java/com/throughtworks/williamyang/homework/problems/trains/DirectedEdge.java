@@ -1,4 +1,4 @@
-package com.throughtworks.williamyang.homework.problem1;
+package com.throughtworks.williamyang.homework.problems.trains;
 
 /**
  * Created by Administrator on 2016/12/1.

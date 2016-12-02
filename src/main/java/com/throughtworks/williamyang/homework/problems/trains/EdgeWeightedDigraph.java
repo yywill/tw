@@ -1,4 +1,4 @@
-package com.throughtworks.williamyang.homework.problem1;
+package com.throughtworks.williamyang.homework.problems.trains;
 
 import java.util.*;
 
