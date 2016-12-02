@@ -224,9 +224,29 @@ public class EdgeWeightedDigraph {
     }
 
 
-    public int sumPathes(char a, char b, int max) {
+    //init condition: maxWeight == left
+    protected int sumPathes (char a, char b , int maxWeight, int left, PriorityQueue<Integer> queue){
+        Iterator<DirectedEdge> it = adj.get(a).iterator();
+        int count =0;
+        while(it.hasNext()){
+            DirectedEdge edge = it.next();
+            if (left <= edge.weight())
+                return 0;
+            if (edge.to()==b){
+                    count ++;
+                    queue.add(maxWeight-left+edge.weight());
+                    count += sumPathes(edge.to(),b,maxWeight, left-edge.weight(),queue);
 
-        return 0;
 
+            }else{
+
+                   count += sumPathes(edge.to(),b,maxWeight, left-edge.weight(),queue);
+            }
+        }
+        return count;
+    }
+
+    public int sumPathes(char a, char b , int maxWeight){
+        return sumPathes(a,b,maxWeight,maxWeight,new PriorityQueue<Integer>());
     }
 }
