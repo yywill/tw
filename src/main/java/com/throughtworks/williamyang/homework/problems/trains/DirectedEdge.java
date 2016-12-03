@@ -16,7 +16,6 @@ public class DirectedEdge {
     }
 
     public static DirectedEdge  create(String command){
-
         DirectedEdge edge  = new DirectedEdge(command.charAt(0),command.charAt(1),Integer.valueOf(command.substring(2,command.length())));
         return edge;
     }
@@ -33,8 +32,5 @@ public class DirectedEdge {
         return weight;
     }
 
-    public String toString() {
-        return v + "->" + w + " " + String.format("%5.2f", weight);
-    }
 
 }
