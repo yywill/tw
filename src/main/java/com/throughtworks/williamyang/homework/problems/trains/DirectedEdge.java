@@ -8,11 +8,17 @@ public class DirectedEdge {
     private final char w;
     private final int weight;
 
-    public DirectedEdge(char v, char w, int weight) {
+    private DirectedEdge(char v, char w, int weight) {
         if (Double.isNaN(weight)) throw new IllegalArgumentException("Weight is NaN");
         this.v = v;
         this.w = w;
         this.weight = weight;
+    }
+
+    public static DirectedEdge  create(String command){
+
+        DirectedEdge edge  = new DirectedEdge(command.charAt(0),command.charAt(1),Integer.valueOf(command.substring(2,command.length())));
+        return edge;
     }
 
     public char from() {

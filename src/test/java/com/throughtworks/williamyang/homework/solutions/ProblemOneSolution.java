@@ -12,7 +12,7 @@ public class ProblemOneSolution {
 
     final static Logger log = Logger.getLogger(ProblemOneSolution.class.getName());
       static EdgeWeightedDigraph g ;
-
+    static String input = "AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7";
     /**
      The distance of the route A-B-C.
      The distance of the route A-D.
@@ -27,17 +27,10 @@ public class ProblemOneSolution {
      */
     @BeforeClass
     public static void input(){
-        //AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
         g = new EdgeWeightedDigraph();
-        g.addEdge(new DirectedEdge('A','B',5));
-        g.addEdge(new DirectedEdge('B','C',4));
-        g.addEdge(new DirectedEdge('C','D',8));
-        g.addEdge(new DirectedEdge('D','C',8));
-        g.addEdge(new DirectedEdge('D','E',6));
-        g.addEdge(new DirectedEdge('A','D',5));
-        g.addEdge(new DirectedEdge('C','E',2));
-        g.addEdge(new DirectedEdge('E','B',3));
-        g.addEdge(new DirectedEdge('A','E',7));
+        for (String s : input.split(",")){
+            g.addEdge(DirectedEdge.create(s.trim()));
+        }
     }
 
     public static String convertOutput(int i) {

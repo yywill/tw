@@ -20,53 +20,39 @@ public class ProblemTwoSolution {
     final static Logger log = Logger.getLogger(ProblemTwoSolution.class.getName());
     static Set<Talk> pool ;
 
-    /**
-     pool
-     Writing Fast Tests Against Enterprise Rails 60min
-     Overdoing it in Python 45min
-     Lua for the Masses 30min
-     Ruby Errors from Mismatched Gem Versions 45min
-     Common Ruby Errors 45min
-     Rails for Python Developers lightning
-     Communicating Over Distance 60min
-     Accounting-Driven Development 45min
-     Woah 30min
-     Sit Down and Write 30min
-     Pair Programming vs Noise 45min
-     Rails Magic 60min
-     Ruby on Rails: Why We Should Move On 60min
-     Clojure Ate Scala (on my project) 45min
-     Programming in the Boondocks of Seattle 30min
-     Ruby vs. Clojure for Back-End Development 30min
-     Ruby on Rails Legacy App Maintenance 60min
-     A World Without HackerNews 30min
-     User Interface CSS in Rails Apps 30min
-     */
+    static String input = "Writing Fast Tests Against Enterprise Rails 60min\n" +
+            "Overdoing it in Python 45min\n" +
+            "Lua for the Masses 30min\n" +
+            "Ruby Errors from Mismatched Gem Versions 45min\n" +
+            "Common Ruby Errors 45min\n" +
+            "Rails for Python Developers lightning\n" +
+            "Communicating Over Distance 60min\n" +
+            "Accounting-Driven Development 45min\n" +
+            "Woah 30min\n" +
+            "Sit Down and Write 30min\n" +
+            "Pair Programming vs Noise 45min\n" +
+            "Rails Magic 60min\n" +
+            "Ruby on Rails: Why We Should Move On 60min\n" +
+            "Clojure Ate Scala (on my project) 45min\n" +
+            "Programming in the Boondocks of Seattle 30min\n" +
+            "Ruby vs. Clojure for Back-End Development 30min\n" +
+            "Ruby on Rails Legacy App Maintenance 60min\n" +
+            "A World Without HackerNews 30min\n" +
+            "User Interface CSS in Rails Apps 30min" ;
+
     @BeforeClass
     public static void input(){
         pool = new HashSet();
-        pool.add(Talk.buildTalk("Writing Fast Tests Against Enterprise Rails", 60));
-        pool.add(Talk.buildTalk("Overdoing it in Python", 45));
-        pool.add(Talk.buildTalk("Lua for the Masses", 30));
-        pool.add(Talk.buildTalk("Ruby Errors from Mismatched Gem Versions", 45));
-        pool.add(Talk.buildTalk("Common Ruby Errors", 45));
-        //lightning
-        pool.add(Talk.buildTalk("Rails for Python Developers",5));
-        pool.add(Talk.buildTalk("Communicating Over Distance", 60));
-        pool.add(Talk.buildTalk("Accounting-Driven Development", 45));
-        pool.add(Talk.buildTalk("Woah", 30));
-        pool.add(Talk.buildTalk("Sit Down and Write", 30));
-        pool.add(Talk.buildTalk("Pair Programming vs Noise", 45));
-        pool.add(Talk.buildTalk("Rails Magic", 60));
-        pool.add(Talk.buildTalk("Ruby on Rails: Why We Should Move On", 60));
-        pool.add(Talk.buildTalk("Clojure Ate Scala (on my project)", 45));
-        pool.add(Talk.buildTalk("Programming in the Boondocks of Seattle", 30));
-        pool.add(Talk.buildTalk("Ruby vs. Clojure for Back-End Development", 30));
-        pool.add(Talk.buildTalk("Ruby on Rails Legacy App Maintenance", 60));
-        pool.add(Talk.buildTalk("A World Without HackerNews", 30));
-        pool.add(Talk.buildTalk("User Interface CSS in Rails Apps", 30));
 
-
+        String[] commands = input.split("\n");
+        for(String command: commands){
+            try {
+                pool.add(Talk.buildTalk(command));
+            }catch (Throwable ex){
+                log.severe("ERROR at init: "+command);
+                throw new RuntimeException(ex);
+            }
+        }
 
     }
 

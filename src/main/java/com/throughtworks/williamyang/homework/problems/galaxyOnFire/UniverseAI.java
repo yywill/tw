@@ -80,47 +80,52 @@ public class UniverseAI {
 
     private static String answer(EnglishParser.QuestionContext question) {
 
-        StringBuilder sb = new StringBuilder();
-
         if(question.HOWMUCH()!=null){
-            List<TerminalNode> identifier = question.IDENTIFIER();
-            String answer = trans(identifier);
-            for(TerminalNode node : identifier){
-                sb.append(node.getText());
-                sb.append(" ");
-            }
-            sb.append(question.IS().getText());
-            sb.append(" ");
-            sb.append(roman(answer));
-            return sb.toString();
+            return answerHowMuch(question);
         }
-
         if (question.HOWMANY()!=null){
-            String quantity = trans(question.IDENTIFIER());
-            String objects = question.OBJECTS().getText();
-            int q = roman(quantity);
-            if (q==0)
-                throw new RuntimeException( "Cannot parsing secret number system!");
-            Integer pricing = pricingDB.get(objects);
-            if (pricing == null)
-                throw new RuntimeException( "cannot find the pricing information in database!");
-            for(TerminalNode node : question.IDENTIFIER()){
-                sb.append(node.getText());
-                sb.append(" ");
-            }
-            sb.append(question.OBJECTS().getText());
-            sb.append(" ");
-            sb.append(question.IS().getText());
-            sb.append(" ");
-            sb.append(pricing*q);
-            sb.append(" ");
-            sb.append(question.CEDITS());
-            return sb.toString();
-
+            return answerHowMany(question);
         }
-
         throw new RuntimeException("I have no idea what you are talking about");
 
+    }
+
+    private static String answerHowMany(EnglishParser.QuestionContext question) {
+        StringBuilder sb = new StringBuilder();
+        String quantity = trans(question.IDENTIFIER());
+        String objects = question.OBJECTS().getText();
+        int q = roman(quantity);
+        if (q==0)
+            throw new RuntimeException( "Cannot parsing secret number system!");
+        Integer pricing = pricingDB.get(objects);
+        if (pricing == null)
+            throw new RuntimeException( "cannot find the pricing information in database!");
+        for(TerminalNode node : question.IDENTIFIER()){
+            sb.append(node.getText());
+            sb.append(" ");
+        }
+        sb.append(question.OBJECTS().getText());
+        sb.append(" ");
+        sb.append(question.IS().getText());
+        sb.append(" ");
+        sb.append(pricing*q);
+        sb.append(" ");
+        sb.append(question.CEDITS());
+        return sb.toString();
+    }
+
+    private static String answerHowMuch(EnglishParser.QuestionContext question) {
+        StringBuilder sb = new StringBuilder();
+        List<TerminalNode> identifier = question.IDENTIFIER();
+        String answer = trans(identifier);
+        for(TerminalNode node : identifier){
+            sb.append(node.getText());
+            sb.append(" ");
+        }
+        sb.append(question.IS().getText());
+        sb.append(" ");
+        sb.append(roman(answer));
+        return sb.toString();
     }
 
     private static String trans(List<TerminalNode> identifiers) {
