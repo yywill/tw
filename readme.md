@@ -54,4 +54,8 @@ Bootstrap: com.throughtworks.williamyang.homework.solutions.ProblemThreeSolution
 
 I aware the constraints of "not using any frameworks". But, I would strongly recommend a parsing DSL tool(in my solution: anltr), because parsing tech is a copy paste work which must be replaced by auto-mathine. Beyond of that, the problem could be solved by two dictionaries. One is used to decryto secret number systems. Another is used for pricing. 
 
+### NOTE: It is a trick to handle money(same as credits). Bitcoin allows infinity(now, it is 8) digits after ".", but most of morden currency would not allow that. My pricing engine allows float point compuation, so it may introduce lose digits problems(LOSE MONEY!). And this problem is unable to solve, unless we have fix point money system(like RMB). Another way to solve it is to produce money rather than loose it. My solution uses Math.ceil to make sure the credits always be integer, and a middleman cannot profit from it. It is fit the right way which is be point out by economist ---- inflation. 
+
 ![Proof of Solution](/images/screenshot_of_3.PNG)
+
+
