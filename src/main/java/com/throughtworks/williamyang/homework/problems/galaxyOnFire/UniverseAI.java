@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class UniverseAI {
     static Map<String,String> decryption = new HashMap<String, String>();
-    static Map<String,Integer> pricingDB = new HashMap<String, Integer>();
+    static Map<String,Double> pricingDB = new HashMap<String, Double>();
 
     public void input(String query){
 
@@ -45,7 +45,7 @@ public class UniverseAI {
             List<TerminalNode> identifiers = p.IDENTIFIER();
             int q = roman(trans(identifiers));
             TerminalNode objects = p.OBJECTS();
-            pricingDB.put(objects.getText(), (Integer.valueOf(decimal.getText())/q));
+            pricingDB.put(objects.getText(), (Double.valueOf(decimal.getText())/q));
         }
 
         List<EnglishParser.QuestionContext> questions = parse.question();
@@ -97,18 +97,19 @@ public class UniverseAI {
         int q = roman(quantity);
         if (q==0)
             throw new RuntimeException( "Cannot parsing secret number system!");
-        Integer pricing = pricingDB.get(objects);
+        Double pricing = pricingDB.get(objects);
         if (pricing == null)
             throw new RuntimeException( "cannot find the pricing information in database!");
         for(TerminalNode node : question.IDENTIFIER()){
             sb.append(node.getText());
             sb.append(" ");
         }
+        int finalPrice = Double.valueOf(Math.ceil(pricing*q)).intValue();
         sb.append(question.OBJECTS().getText());
         sb.append(" ");
         sb.append(question.IS().getText());
         sb.append(" ");
-        sb.append(pricing*q);
+        sb.append(finalPrice);
         sb.append(" ");
         sb.append(question.CEDITS());
         return sb.toString();
