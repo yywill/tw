@@ -20,9 +20,10 @@ public class EnglishParser extends Parser {
 		IS=1, ROMAN=2, CEDITS=3, OBJECTS=4, HOWMANY=5, HOWMUCH=6, Q=7, DECIMAL=8, 
 		IDENTIFIER=9, NEWLINE=10, WC=11, QUANTANTY=12;
 	public static final int
-		RULE_parse = 0, RULE_assignment = 1, RULE_pricing = 2, RULE_question = 3;
+		RULE_parse = 0, RULE_assignment = 1, RULE_pricing = 2, RULE_question = 3, 
+		RULE_exception = 4;
 	public static final String[] ruleNames = {
-		"parse", "assignment", "pricing", "question"
+		"parse", "assignment", "pricing", "question", "exception"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -100,6 +101,12 @@ public class EnglishParser extends Parser {
 		public QuestionContext question(int i) {
 			return getRuleContext(QuestionContext.class,i);
 		}
+		public List<ExceptionContext> exception() {
+			return getRuleContexts(ExceptionContext.class);
+		}
+		public ExceptionContext exception(int i) {
+			return getRuleContext(ExceptionContext.class,i);
+		}
 		public ParseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -121,35 +128,41 @@ public class EnglishParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(13);
+			setState(16);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << HOWMANY) | (1L << HOWMUCH) | (1L << IDENTIFIER))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << HOWMANY) | (1L << HOWMUCH) | (1L << Q) | (1L << IDENTIFIER))) != 0)) {
 				{
-				setState(11);
+				setState(14);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 				case 1:
 					{
-					setState(8);
+					setState(10);
 					assignment();
 					}
 					break;
 				case 2:
 					{
-					setState(9);
+					setState(11);
 					pricing();
 					}
 					break;
 				case 3:
 					{
-					setState(10);
+					setState(12);
 					question();
+					}
+					break;
+				case 4:
+					{
+					setState(13);
+					exception();
 					}
 					break;
 				}
 				}
-				setState(15);
+				setState(18);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -191,13 +204,13 @@ public class EnglishParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(16);
-			match(IDENTIFIER);
-			setState(17);
-			match(IS);
-			setState(18);
-			match(ROMAN);
 			setState(19);
+			match(IDENTIFIER);
+			setState(20);
+			match(IS);
+			setState(21);
+			match(ROMAN);
+			setState(22);
 			match(NEWLINE);
 			}
 		}
@@ -243,29 +256,29 @@ public class EnglishParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(22); 
+			setState(25); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(21);
+				setState(24);
 				match(IDENTIFIER);
 				}
 				}
-				setState(24); 
+				setState(27); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==IDENTIFIER );
-			setState(26);
-			match(OBJECTS);
-			setState(27);
-			match(IS);
-			setState(28);
-			match(DECIMAL);
 			setState(29);
-			match(CEDITS);
+			match(OBJECTS);
 			setState(30);
+			match(IS);
+			setState(31);
+			match(DECIMAL);
+			setState(32);
+			match(CEDITS);
+			setState(33);
 			match(NEWLINE);
 			}
 		}
@@ -281,10 +294,10 @@ public class EnglishParser extends Parser {
 	}
 
 	public static class QuestionContext extends ParserRuleContext {
-		public TerminalNode NEWLINE() { return getToken(EnglishParser.NEWLINE, 0); }
 		public TerminalNode HOWMUCH() { return getToken(EnglishParser.HOWMUCH, 0); }
 		public TerminalNode IS() { return getToken(EnglishParser.IS, 0); }
 		public TerminalNode Q() { return getToken(EnglishParser.Q, 0); }
+		public TerminalNode NEWLINE() { return getToken(EnglishParser.NEWLINE, 0); }
 		public TerminalNode HOWMANY() { return getToken(EnglishParser.HOWMANY, 0); }
 		public TerminalNode CEDITS() { return getToken(EnglishParser.CEDITS, 0); }
 		public TerminalNode OBJECTS() { return getToken(EnglishParser.OBJECTS, 0); }
@@ -313,68 +326,129 @@ public class EnglishParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(55);
 			switch (_input.LA(1)) {
 			case HOWMUCH:
 				{
 				{
-				setState(32);
+				setState(35);
 				match(HOWMUCH);
-				setState(33);
+				setState(36);
 				match(IS);
-				setState(35); 
+				setState(38); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(34);
+					setState(37);
 					match(IDENTIFIER);
 					}
 					}
-					setState(37); 
+					setState(40); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==IDENTIFIER );
-				setState(39);
+				setState(42);
 				match(Q);
+				setState(43);
+				match(NEWLINE);
 				}
 				}
 				break;
 			case HOWMANY:
 				{
 				{
-				setState(40);
+				setState(44);
 				match(HOWMANY);
-				setState(41);
+				setState(45);
 				match(CEDITS);
-				setState(42);
+				setState(46);
 				match(IS);
-				setState(44); 
+				setState(48); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(43);
+					setState(47);
 					match(IDENTIFIER);
 					}
 					}
-					setState(46); 
+					setState(50); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==IDENTIFIER );
-				setState(48);
+				setState(52);
 				match(OBJECTS);
-				setState(49);
+				setState(53);
 				match(Q);
+				setState(54);
+				match(NEWLINE);
 				}
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(52);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ExceptionContext extends ParserRuleContext {
+		public TerminalNode Q() { return getToken(EnglishParser.Q, 0); }
+		public TerminalNode NEWLINE() { return getToken(EnglishParser.NEWLINE, 0); }
+		public List<TerminalNode> IDENTIFIER() { return getTokens(EnglishParser.IDENTIFIER); }
+		public TerminalNode IDENTIFIER(int i) {
+			return getToken(EnglishParser.IDENTIFIER, i);
+		}
+		public ExceptionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_exception; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof EnglishListener ) ((EnglishListener)listener).enterException(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof EnglishListener ) ((EnglishListener)listener).exitException(this);
+		}
+	}
+
+	public final ExceptionContext exception() throws RecognitionException {
+		ExceptionContext _localctx = new ExceptionContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_exception);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(60);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==IDENTIFIER) {
+				{
+				{
+				setState(57);
+				match(IDENTIFIER);
+				}
+				}
+				setState(62);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(63);
+			match(Q);
+			setState(64);
 			match(NEWLINE);
 			}
 		}
@@ -390,22 +464,24 @@ public class EnglishParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\169\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\7\2\16\n\2\f\2\16\2\21\13\2\3\3\3\3\3\3"+
-		"\3\3\3\3\3\4\6\4\31\n\4\r\4\16\4\32\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3"+
-		"\5\6\5&\n\5\r\5\16\5\'\3\5\3\5\3\5\3\5\3\5\6\5/\n\5\r\5\16\5\60\3\5\3"+
-		"\5\5\5\65\n\5\3\5\3\5\3\5\2\2\6\2\4\6\b\2\2;\2\17\3\2\2\2\4\22\3\2\2\2"+
-		"\6\30\3\2\2\2\b\64\3\2\2\2\n\16\5\4\3\2\13\16\5\6\4\2\f\16\5\b\5\2\r\n"+
-		"\3\2\2\2\r\13\3\2\2\2\r\f\3\2\2\2\16\21\3\2\2\2\17\r\3\2\2\2\17\20\3\2"+
-		"\2\2\20\3\3\2\2\2\21\17\3\2\2\2\22\23\7\13\2\2\23\24\7\3\2\2\24\25\7\4"+
-		"\2\2\25\26\7\f\2\2\26\5\3\2\2\2\27\31\7\13\2\2\30\27\3\2\2\2\31\32\3\2"+
-		"\2\2\32\30\3\2\2\2\32\33\3\2\2\2\33\34\3\2\2\2\34\35\7\6\2\2\35\36\7\3"+
-		"\2\2\36\37\7\n\2\2\37 \7\5\2\2 !\7\f\2\2!\7\3\2\2\2\"#\7\b\2\2#%\7\3\2"+
-		"\2$&\7\13\2\2%$\3\2\2\2&\'\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)\65"+
-		"\7\t\2\2*+\7\7\2\2+,\7\5\2\2,.\7\3\2\2-/\7\13\2\2.-\3\2\2\2/\60\3\2\2"+
-		"\2\60.\3\2\2\2\60\61\3\2\2\2\61\62\3\2\2\2\62\63\7\6\2\2\63\65\7\t\2\2"+
-		"\64\"\3\2\2\2\64*\3\2\2\2\65\66\3\2\2\2\66\67\7\f\2\2\67\t\3\2\2\2\b\r"+
-		"\17\32\'\60\64";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\16E\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\7\2\21\n\2\f\2\16\2\24\13\2"+
+		"\3\3\3\3\3\3\3\3\3\3\3\4\6\4\34\n\4\r\4\16\4\35\3\4\3\4\3\4\3\4\3\4\3"+
+		"\4\3\5\3\5\3\5\6\5)\n\5\r\5\16\5*\3\5\3\5\3\5\3\5\3\5\3\5\6\5\63\n\5\r"+
+		"\5\16\5\64\3\5\3\5\3\5\5\5:\n\5\3\6\7\6=\n\6\f\6\16\6@\13\6\3\6\3\6\3"+
+		"\6\3\6\2\2\7\2\4\6\b\n\2\2H\2\22\3\2\2\2\4\25\3\2\2\2\6\33\3\2\2\2\b9"+
+		"\3\2\2\2\n>\3\2\2\2\f\21\5\4\3\2\r\21\5\6\4\2\16\21\5\b\5\2\17\21\5\n"+
+		"\6\2\20\f\3\2\2\2\20\r\3\2\2\2\20\16\3\2\2\2\20\17\3\2\2\2\21\24\3\2\2"+
+		"\2\22\20\3\2\2\2\22\23\3\2\2\2\23\3\3\2\2\2\24\22\3\2\2\2\25\26\7\13\2"+
+		"\2\26\27\7\3\2\2\27\30\7\4\2\2\30\31\7\f\2\2\31\5\3\2\2\2\32\34\7\13\2"+
+		"\2\33\32\3\2\2\2\34\35\3\2\2\2\35\33\3\2\2\2\35\36\3\2\2\2\36\37\3\2\2"+
+		"\2\37 \7\6\2\2 !\7\3\2\2!\"\7\n\2\2\"#\7\5\2\2#$\7\f\2\2$\7\3\2\2\2%&"+
+		"\7\b\2\2&(\7\3\2\2\')\7\13\2\2(\'\3\2\2\2)*\3\2\2\2*(\3\2\2\2*+\3\2\2"+
+		"\2+,\3\2\2\2,-\7\t\2\2-:\7\f\2\2./\7\7\2\2/\60\7\5\2\2\60\62\7\3\2\2\61"+
+		"\63\7\13\2\2\62\61\3\2\2\2\63\64\3\2\2\2\64\62\3\2\2\2\64\65\3\2\2\2\65"+
+		"\66\3\2\2\2\66\67\7\6\2\2\678\7\t\2\28:\7\f\2\29%\3\2\2\29.\3\2\2\2:\t"+
+		"\3\2\2\2;=\7\13\2\2<;\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3\2\2\2"+
+		"@>\3\2\2\2AB\7\t\2\2BC\7\f\2\2C\13\3\2\2\2\t\20\22\35*\649>";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

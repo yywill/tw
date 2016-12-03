@@ -59,6 +59,18 @@ public class EnglishBaseListener implements EnglishListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitQuestion(EnglishParser.QuestionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterException(EnglishParser.ExceptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitException(EnglishParser.ExceptionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -72,12 +72,12 @@ public class ProblemOneSolution {
 
     @Test
     public void solve06(){
-        System.out.println(convertOutput(g.search('C','C',3,-1)));
+        System.out.println(convertOutput(g.searchAtLeast('C','C',3)));
     }
 
     @Test
     public void solve07(){
-        System.out.println(convertOutput(g.deepSearch('A','C',4,0)));
+        System.out.println(convertOutput(g.deepSearchExact('A','C',4)));
     }
 
     @Test

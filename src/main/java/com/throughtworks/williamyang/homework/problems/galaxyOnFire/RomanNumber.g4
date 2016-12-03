@@ -3,18 +3,17 @@ grammar RomanNumber ;
 options {
 	language = Java;
 }
+
 @members {
 int rnValue;
 int ONE;
 }
 
-
-parseRN:	({rnValue = 0;} rn NEWLINE {System.out.println($rn.text + " = " + rnValue);})*
+// {System.out.println($rn.text + " = " + rnValue);}
+parseRN:	({rnValue = 0;} rn NEWLINE )*
 	;
 
-WS
-: ( '\t' | ' ' | '\r' | '\n' )+ { skip(); }
-;
+
 
 rn	:	(Thousand {rnValue += 1000;})* hundreds? tens? units?;
 
@@ -37,5 +36,8 @@ Fifty	:	'L';
 Hundred:	'C';
 FiveHund:	'D';
 Thousand:	'M' ;
+
+
 NEWLINE:	'\r'? '\n' ;
+
 

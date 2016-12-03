@@ -47,4 +47,14 @@ public interface EnglishListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitQuestion(EnglishParser.QuestionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link EnglishParser#exception}.
+	 * @param ctx the parse tree
+	 */
+	void enterException(EnglishParser.ExceptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link EnglishParser#exception}.
+	 * @param ctx the parse tree
+	 */
+	void exitException(EnglishParser.ExceptionContext ctx);
 }

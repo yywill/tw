@@ -72,7 +72,7 @@ public class ProblemTwoSolution {
 
 
     @Test
-    public void solve01(){
+    public void solve(){
         Set<Track> plan = new Scheduler().plan(pool);
         for (Track track: plan){
             System.out.print(track.toString());

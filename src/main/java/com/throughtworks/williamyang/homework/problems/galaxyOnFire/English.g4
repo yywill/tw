@@ -19,7 +19,7 @@ options {
 }
 
 IS: 'is';
-ROMAN: 'I'|'V'|'X'|'L'|'C'|'D'|'M' ;
+ROMAN: ('I'|'V'|'X'|'L'|'C'|'D'|'M')+ ;
 CEDITS: 'Credits';
 OBJECTS: 'Silver'|'Gold'|'Iron';
 HOWMANY: 'how many';
@@ -30,11 +30,12 @@ IDENTIFIER : [a-zA-Z_][a-zA-Z_0-9]* ;
 NEWLINE: '\r'?'\n';
 WC : (' '|'\t'|'\n'|'\r')+ {skip() ;};
 QUANTANTY: IDENTIFIER+;
-parse: (assignment|pricing|question)* ;
+parse: (assignment|pricing|question|exception)* ;
 
 assignment:  IDENTIFIER IS ROMAN NEWLINE;
 pricing: IDENTIFIER+ OBJECTS IS DECIMAL CEDITS NEWLINE;
-question: ( (HOWMUCH IS IDENTIFIER+  Q)| (HOWMANY CEDITS IS IDENTIFIER+ OBJECTS  Q) ) NEWLINE;
+question: ( (HOWMUCH IS IDENTIFIER+  Q NEWLINE)| (HOWMANY CEDITS IS IDENTIFIER+ OBJECTS  Q NEWLINE) ) ;
+exception: IDENTIFIER* Q NEWLINE;
 
 
 
