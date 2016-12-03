@@ -32,7 +32,7 @@ It is a batch questions about diagraph algorithm. "com.throughtworks.williamyang
 
 The question is too obivious to name DirectedEdge as track. DirectedEdge.create is a static creation to create a track from a command(like "AB5").
 
-![Proof of Solution](/images/screenshot_of_1.png)
+![Proof of Solution](/images/screenshot_of_1.PNG)
 
 ## 2. Problem Two:
 
@@ -46,7 +46,7 @@ The trick parts:
 * since network talks begins no earlier than 4pm and no later than 5pm, it could be hard code to fix at 5pm. 
 * clock time should be set as member variables for track and talk, becaues it is the result of schedularing.
 
-![Proof of Solution](/images/screenshot_of_2.png)
+![Proof of Solution](/images/screenshot_of_2.PNG)
 
 ## 3. Problem Three:
 
@@ -54,4 +54,4 @@ Bootstrap: com.throughtworks.williamyang.homework.solutions.ProblemThreeSolution
 
 I aware the constraints of "not using any frameworks". But, I would strongly recommend a parsing DSL tool(in my solution: anltr), because parsing tech is a copy paste work which must be replaced by auto-mathine. Beyond of that, the problem could be solved by two dictionaries. One is used to decryto secret number systems. Another is used for pricing. 
 
-![Proof of Solution](/images/screenshot_of_3.png)
+![Proof of Solution](/images/screenshot_of_3.PNG)
